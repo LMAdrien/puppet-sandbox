@@ -3,12 +3,18 @@
 #
 
 # self-manage the puppet master server
-node 'puppet' { }
+
+include stdlib
+
+# Puppet server
+node 'puppet' {
+}
 
 ##### CLIENTS
 
 node 'client1' {
-  class { 'helloworld': }
 }
 
-node 'client2' { }
+node 'client2' {
+
+}

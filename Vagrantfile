@@ -8,7 +8,7 @@ ram = 512
 puppet_nodes = [
   {:hostname => 'puppet',  :ip => '172.16.32.10', :box => box, :fwdhost => 8140, :fwdguest => 8140, :ram => ram},
   {:hostname => 'client1', :ip => '172.16.32.11', :box => box},
-  {:hostname => 'client2', :ip => '172.16.32.12', :box => box},
+  {:hostname => 'client2', :ip => '172.16.32.12', :box => 'centOS_DSFVBOX' },
 ]
 
 Vagrant.configure("2") do |config|
@@ -21,6 +21,7 @@ Vagrant.configure("2") do |config|
 
       if node[:fwdhost]
         node_config.vm.network :forwarded_port, guest: node[:fwdguest], host: node[:fwdhost]
+        node_config.vm.synced_folder "./modules", "/etc/puppet/modules"
       end
 
       memory = node[:ram] ? node[:ram] : 256;
